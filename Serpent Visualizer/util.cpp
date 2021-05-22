@@ -13,7 +13,7 @@ bool waitWindow(sf::RenderWindow* win, int mlSec) {
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) // дополнение для возможности ускорить выполнение по нажатию F
 			return true;
-		Sleep(25);
+		std::this_thread::sleep_for(std::chrono::milliseconds(25));
 	}
 	return false;
 }

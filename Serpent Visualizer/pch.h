@@ -5,9 +5,8 @@
 #include <sstream>
 #include <fstream>
 #include <bitset>
+#include <thread>
 #include <SFML/Graphics.hpp>
-
-#include <Windows.h> // нужен для sleep в самом конце, чтобы безостановочно не грузить процессор
 
 #include "serpent.h"
 #include "util.h"

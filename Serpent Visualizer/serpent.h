@@ -44,9 +44,6 @@ extern byte** isBoxes;
 byte* getFullKey(byte* startKey, int startKeyLength);
 int* devideKeyIntoBlocks(byte* fullKey);
 byte* sBox(byte* data, int round);
-byte* sBoxInv(byte* data, int round);
-//byte* initPermutation(byte* data);
-//byte* finalPermutation(byte* data);
 
 void doPermutation(int structureSize, int dataBitNumber, int distBitNumber, byte* data, byte* dist);
 byte* doInitPermutation(byte* data);

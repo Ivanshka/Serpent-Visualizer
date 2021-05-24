@@ -36,30 +36,6 @@ void memoryToText(std::wstringstream* outStream, void* memory, int byteCount) {
 	}
 }
 
-void mempnt(void* memory, int byteCount) {
-	char* address = (char*)memory;
-	for (int i = 0; i < byteCount; i++) {	// обратный порядок байт
-		std::cout << std::bitset<sizeof(address[i]) * 8>(address[i]) << " ";
-		if ((i + 1) % 8 == 0)
-			std::cout << "\n";
-	}
-}
-
-void mempntioe(void* memory, int byteCount) {
-	char* address = (char*)memory;
-	for (int i = byteCount - 1, endLine = 1; i >= 0; i--, endLine++) {	// прямой порядок байт
-		std::cout << std::bitset<sizeof(address[i]) * 8>(address[i]) << " ";
-		if (endLine % 8 == 0)
-			std::cout << "\n";
-	}
-}
-
-void checkEndianness()
-{
-	uint16_t x = 0x0001;
-	printf("%s-endian\n", *((uint8_t*)&x) ? "little" : "big");
-}
-
 int cyclicLeftShift(int integer, int steps) {
 	std::bitset<32> bit(integer), part1, part2, result;
 	part1 = bit << steps;
@@ -112,62 +88,4 @@ int cyclicRightShiftInOtherEndianness(int integer, int steps) {
 	byteArray[1] = byteArray[2];
 	byteArray[2] = buf;
 	return integer;
-}
-
-int leftShiftInOtherEndianness(int integer, int steps)
-{
-	byte* byteArray = (byte*)&integer;
-	byte buf;
-	buf = byteArray[0];
-	byteArray[0] = byteArray[3];
-	byteArray[3] = buf;
-	buf = byteArray[1];
-	byteArray[1] = byteArray[2];
-	byteArray[2] = buf;
-	integer = integer << steps;
-	buf = byteArray[0];
-	byteArray[0] = byteArray[3];
-	byteArray[3] = buf;
-	buf = byteArray[1];
-	byteArray[1] = byteArray[2];
-	byteArray[2] = buf;
-	return integer;
-}
-
-int rightShiftInOtherEndianness(int integer, int steps)
-{
-	byte* byteArray = (byte*)&integer;
-	byte buf;
-	buf = byteArray[0];
-	byteArray[0] = byteArray[3];
-	byteArray[3] = buf;
-	buf = byteArray[1];
-	byteArray[1] = byteArray[2];
-	byteArray[2] = buf;
-	integer = integer >> steps;
-	buf = byteArray[0];
-	byteArray[0] = byteArray[3];
-	byteArray[3] = buf;
-	buf = byteArray[1];
-	byteArray[1] = byteArray[2];
-	byteArray[2] = buf;
-	return integer;
-}
-
-std::vector<std::string>& split(const std::string& s, char delim, std::vector<std::string>& elems)
-{
-	std::stringstream ss(s);
-	std::string item;
-	while (std::getline(ss, item, delim))
-	{
-		elems.push_back(item);
-	}
-	return elems;
-}
-
-std::vector<std::string> split(const std::string& s, char delim)
-{
-	std::vector<std::string> elems;
-	split(s, delim, elems);
-	return elems;
 }

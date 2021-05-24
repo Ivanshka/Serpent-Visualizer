@@ -140,17 +140,13 @@ void doPermutation(int structureSize, int dataBitNumber, int distBitNumber, byte
 	// сначала выделяем нужный байт данных
 	int selectedDataByteIndex = dataBitNumber / 8;
 	byte selectedDataByte = data[selectedDataByteIndex];
-	//printf("\nselected byte: %d", selectedDataByte);
 	int newDataBitNumber = 7 - dataBitNumber % 8;
 	bool bitValue = data[selectedDataByteIndex] & 1 << newDataBitNumber;
-	//printf("\nbit %d is %d, dist bit is %d\n", dataBitNumber, bitValue, distBitNumber);
 
 	// сначала выделяем нужный байт данных
 	int selectedDistByteIndex = distBitNumber / 8;
 	byte newDistBitNumber = 7 - distBitNumber % 8;
 	dist[selectedDistByteIndex] |= bitValue << newDistBitNumber;
-
-	//memprtle(dist, 4);
 }
 
 byte* doInitPermutation(byte* data) {
